@@ -12,7 +12,8 @@ RUN apt-get update && apt-get install -y docker-ce-cli
 
 RUN curl https://baltocdn.com/helm/signing.asc | apt-key add - && \
        echo "deb https://baltocdn.com/helm/stable/debian/ all main" | tee /etc/apt/sources.list.d/helm-stable-debian.list && \
-       apt-get update && apt-get install helm
+       apt-get update && apt-get install helm && \
+       helm plugin install https://github.com/chartmuseum/helm-push.git
 
 USER jenkins
 RUN jenkins-plugin-cli --plugins "blueocean:1.24.5 docker-workflow:1.26"
